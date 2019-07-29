@@ -71,6 +71,16 @@ body {
     height: 100px;
   }
 
+  /* Alert */
+  .alert{
+    text-align: center;
+    padding:10px;
+    background:#79c879;
+    color:#fff;
+    margin-bottom:10px;
+    display:none;
+  }
+
 [tabindex="-1"]:focus {
   outline: 0 !important; }
 

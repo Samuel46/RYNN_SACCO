@@ -1,4 +1,4 @@
-// Your web app's Firebase configuration
+// Your web app's Firebase configuration // Initialize Firebase
 var firebaseConfig = {
   apiKey: "AIzaSyCYI9RMe8k7kSBPN3w21M9tBC6LNW2_REk",
   authDomain: "rynnnn-cf958.firebaseapp.com",
@@ -8,18 +8,35 @@ var firebaseConfig = {
   messagingSenderId: "585137539639",
   appId: "1:585137539639:web:b80c2515df4912fd"
 };
-// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-//   Get Values
-var applicant_name = getInputVal("applicant_name");
-var national_id = getInputVal("national_id");
-var gender = getInputVal("gender");
-var other_dep = getInputVal("other_dep");
-var mobile_no = getInputVal("mobile_no");
+// Reference messages collection
+var messagesRef = firebase.database().ref("applicant_name");
 
-// Save the application form
-saveMessage(applicant_name, national_id, gender, other_dep, mobile_no);
+// Submit form
+function submitForm(e) {
+  e.preventDefault();
+
+  //   Get Values
+  var applicant_name = getInputVal("applicant_name");
+  var national_id = getInputVal("national_id");
+  var gender = getInputVal("gender");
+  var other_dep = getInputVal("other_dep");
+  var mobile_no = getInputVal("mobile_no");
+
+  // Save the application form
+  saveMessage(applicant_name, national_id, gender, other_dep, mobile_no);
+
+  // show Alert
+  document.querySelector(".alert").style.display = "block";
+  // Hide alert after 3 seconds
+  setTimeout(function() {
+    document.querySelector(".alert").style.display = "none";
+  }, 3000);
+
+  //   Clear form
+  document.getElementById("contactForm").reset();
+}
 
 // Function to get get form values
 function getInputVal(id) {
@@ -33,8 +50,8 @@ function saveMessage(
   other_dep,
   mobile_no
 ) {
-  var newMessafeRef = messagesRef.push();
-  newMessafeRef.set({
+  var newMessageRef = messagesRef.push();
+  newMessageRef.set({
     applicant_name: applicant_name,
     national_id: national_id,
     gender: gender,
